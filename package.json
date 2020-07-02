@@ -1,0 +1,84 @@
+{
+  "name": "ice-electron",
+  "version": "0.0.1",
+  "description": "an example based on umijs + electron",
+  "main": "./dist/main/main.js",
+  "private": true,
+  "build": {
+    "files": [
+      "dist/",
+      "node_modules/",
+      "package.json"
+    ],
+    "mac": {
+      "category": "your.app.category.type"
+    },
+    "directories": {
+      "output": "release"
+    },
+    "appId": "umi-electron",
+    "asar": false
+  },
+  "scripts": {
+    "start:dev": "concurrently \"npm run start:renderer\" \"npm run start:main\"",
+    "start": "npm run build-main-dev && electron ./dist/main/main.js",
+    "start:main": "electron-webpack dev",
+    "start:renderer": "cross-env APP_ROOT=src/renderer umi dev",
+    "build-main-prod": "cross-env NODE_ENV=production webpack --config ./build/webpack.main.prod.config.js",
+    "build-main-dev": "cross-env NODE_ENV=development webpack --config ./build/webpack.main.config.js",
+    "build:renderer": "cross-env APP_ROOT=src/renderer umi build",
+    "watch": "tsc -w",
+    "lint": "tslint -c tslint.json -p tsconfig.json",
+    "debug:main": "electron --inspect=5858 -w ./dist/main/main.js",
+    "pack": "npm run build:renderer && npm run build-main-prod && electron-builder --dir",
+    "dist": "electron-builder",
+    "prettier": "prettier --list-different \"./**/*.{ts,tsx,js,jsx,less}\""
+  },
+  "keywords": [
+    "Electron",
+    "umi",
+    "quick",
+    "start",
+    "tutorial",
+    "demo"
+  ],
+  "author": {
+    "name": "icezeros",
+    "email": "icezeros@163.com"
+  },
+  "devDependencies": {
+    "concurrently": "^4.1.0",
+    "cross-env": "^5.2.0",
+    "dva-logger": "^1.0.0",
+    "electron": "^5.0.1",
+    "electron-builder": "^20.39.0",
+    "electron-debug": "^2.2.0",
+    "electron-webpack": "^2.6.2",
+    "prettier": "1.17.0",
+    "uglifyjs-webpack-plugin": "^2.1.2",
+    "umi": "^2.6.17",
+    "umi-plugin-react": "^1.7.6",
+    "webpack": "4.31.0",
+    "webpack-cli": "^3.3.2",
+    "webpack-merge": "^4.2.1"
+  },
+  "dependencies": {
+    "antd": "^4.3.4",
+    "electron-is": "^3.0.0",
+    "electron-log": "^3.0.6",
+    "electron-store": "^3.3.0",
+    "getmac": "^1.4.6",
+    "http-proxy": "^1.17.0",
+    "lodash": "^4.17.11",
+    "react": "^16.8.6",
+    "slash": "^3.0.0"
+  },
+  "electronWebpack": {
+    "main": {
+      "sourceDirectory": "src/main"
+    },
+    "renderer": {
+      "sourceDirectory": null
+    }
+  }
+}
