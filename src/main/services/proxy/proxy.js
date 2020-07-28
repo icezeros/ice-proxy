@@ -60,8 +60,6 @@ export class IProxy {
         pathRewrite: pathRewriteObj,
         router: routerObj,
       };
-      console.log('============ options =============');
-      console.log(options);
       createProxyMiddleware(options)(req, res, next);
     });
 

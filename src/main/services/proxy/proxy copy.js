@@ -18,12 +18,8 @@ export class IAnyProxy {
     // this.init();
   }
   init() {
-    console.log('============ this.options =============');
-    console.log(this.options);
     this.proxyServer = new AnyProxy.ProxyServer(this.options);
     this.proxyServer.on('ready', () => {
-      console.log('============ 111 =============');
-      console.log(111);
       this.status = true;
       const mainWindow = global.application.windowManager.getWindow('main');
       mainWindow.webContents.send('proxy-status', true);
@@ -31,8 +27,6 @@ export class IAnyProxy {
       /* */
     });
     this.proxyServer.on('error', e => {
-      console.log('============ e =============');
-      console.log(e);
       this.status = false;
       const mainWindow = global.application.windowManager.getWindow('main');
       mainWindow.webContents.send('proxy-status', false);
@@ -40,8 +34,6 @@ export class IAnyProxy {
     });
 
     this.proxyServer.on('close', e => {
-      console.log('============ e =============');
-      console.log(e);
       this.status = false;
       const mainWindow = global.application.windowManager.getWindow('main');
       mainWindow.webContents.send('proxy-status', false);
@@ -50,13 +42,9 @@ export class IAnyProxy {
   }
 
   start() {
-    console.log('============ this.status =============');
-    console.log(this.status);
     if (this.status) {
       return;
     }
-    console.log('============ this.proxyServer1111 =============');
-    console.log(this.proxyServer);
     this.init();
     AnyProxy.utils.systemProxyMgr.enableGlobalProxy('127.0.0.1', '8001');
     // AnyProxy.utils.systemProxyMgr.disableGlobalProxy();
@@ -64,8 +52,6 @@ export class IAnyProxy {
     this.proxyServer.start();
   }
   close() {
-    console.log('============ this.status22 =============');
-    console.log(this.status);
     if (!this.status) {
       return;
     }

@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import { Layout, Menu, Row } from 'antd';
 import Link from 'umi/link';
+import {
+  DashboardOutlined,
+  UnorderedListOutlined,
+  AppstoreAddOutlined,
+} from '@ant-design/icons';
 // import icon from '$public/image/icon.png';
 import './index.css';
 
@@ -11,8 +16,6 @@ class Nav extends Component {
   constructor(props) {
     super(props);
     const hash = location.hash.split('/')[1];
-    console.log('============ hash =============');
-    console.log(hash);
     this.state = { current: hash ? hash : 'Home' };
   }
 
@@ -46,12 +49,15 @@ class Nav extends Component {
           onClick={this.handleClick}
         >
           <Item key="dashboard">
+            <DashboardOutlined />
             <Link to="/dashboard">Dashboard</Link>
           </Item>
           <Item key="rule">
+            <UnorderedListOutlined />
             <Link to="/rule">规则列表</Link>
           </Item>
           <Item key="add">
+            <AppstoreAddOutlined />
             <Link to="/add">新增规则</Link>
           </Item>
         </Menu>

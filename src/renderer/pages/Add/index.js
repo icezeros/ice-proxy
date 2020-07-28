@@ -42,10 +42,7 @@ class IPC extends React.Component {
   }
 
   onFinish = values => {
-    console.log('Success:', values);
     ipcRenderer.send('rules-add', values);
-    console.log('============ ipcRenderer =============');
-    console.log(ipcRenderer);
   };
 
   onFinishFailed = errorInfo => {
@@ -74,14 +71,14 @@ class IPC extends React.Component {
           name="from"
           rules={[{ required: true, message: 'Please input your username!' }]}
         >
-          <Input addonBefore="http://" defaultValue="mysite" />
+          <Input defaultValue="mysite" />
         </Form.Item>
         <Form.Item
           label="to"
           name="to"
           rules={[{ required: true, message: 'Please input your username!' }]}
         >
-          <Input addonBefore="http://" defaultValue="mysite" />
+          <Input defaultValue="mysite" />
         </Form.Item>
 
         <Form.Item {...tailLayout}>

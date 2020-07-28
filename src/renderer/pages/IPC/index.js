@@ -58,8 +58,6 @@ class IPC extends React.Component {
     const dirname = getGlobal('__dirname') || 11;
     // const deviecMac = getGlobal('device').mac || 12;
     const deviecMac2 = getGlobal('device');
-    console.log('============ deviecMac2 =============');
-    console.log(deviecMac2);
     const deviecMac = 12;
     const myField = getGlobal('myField') || 13;
     this.setState({ mainId, dirname, deviecMac, myField });

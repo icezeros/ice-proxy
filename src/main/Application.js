@@ -26,8 +26,6 @@ export default class Application extends EventEmitter {
     this.init();
     // this.makeSingleInstance(() => {
     //   //   this.start('main');
-    //   console.log('============ 1111 =============');
-    //   console.log(1111);
     //   this.init();
     // });
   }
@@ -88,8 +86,6 @@ export default class Application extends EventEmitter {
 
   showPage(page, options = {}) {
     const { openedAtLogin } = options;
-    console.log('============ 111 =============');
-    console.log(111);
     const win = this.windowManager.openWindow(page, {
       hidden: openedAtLogin,
     });

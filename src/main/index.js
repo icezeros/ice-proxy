@@ -20,12 +20,6 @@ const application = new Application();
 global.application = application;
 global.proxy = new IProxy();
 
-console.log('============ IProxy =============');
-console.log(IProxy);
-
-// console.log('============ global.proxy =============');
-// console.log(proxy);
-
 function makeSingleInstance(callback) {
   if (is.mas()) {
     callback();

@@ -46,8 +46,6 @@ export default class WindowManager extends EventEmitter {
       width = 1680,
       height = 1027,
     } = screen.getPrimaryDisplay().workAreaSize;
-    console.log('============ width, height =============');
-    console.log(width, height);
     const widthScale = width >= 1280 ? 1 : 0.875;
     const heightScale = height >= 800 ? 1 : 0.875;
     result.window.width *= widthScale;
@@ -90,7 +88,6 @@ export default class WindowManager extends EventEmitter {
     });
 
     const bounds = this.getPageBounds(page);
-    console.log('bounds ====>', bounds);
     if (bounds) {
       window.setBounds(bounds);
     }
@@ -99,8 +96,6 @@ export default class WindowManager extends EventEmitter {
       e.preventDefault();
       shell.openExternal(url);
     });
-    console.log('============ pageOptions =============');
-    console.log(pageOptions);
     if (pageOptions.url) {
       window.loadURL(pageOptions.url);
     }

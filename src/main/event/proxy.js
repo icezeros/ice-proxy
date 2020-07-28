@@ -3,20 +3,14 @@ import { v4 as uuidv4 } from 'uuid';
 
 export default function handleProxyMessage() {
   ipcMain.on('get-proxy-status', event => {
-    console.log('============ global.proxy.status =============');
-    console.log(global.proxy.status);
     event.sender.send('proxy-status', global.proxy.status);
   });
 
   ipcMain.on('proxy-start', event => {
-    console.log('============ start =============');
-    console.log(11111);
     global.proxy.start();
   });
 
   ipcMain.on('proxy-close', event => {
-    console.log('============ end =============');
-    console.log(2222);
     global.proxy.close();
   });
 

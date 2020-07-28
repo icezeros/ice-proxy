@@ -3,8 +3,6 @@ import { Table, Input, InputNumber, Popconfirm, Form } from 'antd';
 import { connect } from 'dva';
 import './index.css';
 const { ipcRenderer, remote } = require('electron');
-console.log('============ connect =============');
-console.log(connect);
 const originData = [];
 
 for (let i = 0; i < 15; i++) {
@@ -56,13 +54,9 @@ const Rule = ({ rule, dispatch }) => {
   const [data, setData] = useState(originData);
   const [editingKey, setEditingKey] = useState('');
   useEffect(() => {
-    console.log('============ 11111 =============');
-    console.log(11111);
     ipcRenderer.send('sync-rules-list');
 
     ipcRenderer.on('async-rules', (event, rules) => {
-      console.log('============ rules1111 =============');
-      console.log(rules);
       rules.forEach((rule, key) => {
         rule.key = key;
       });
@@ -76,11 +70,6 @@ const Rule = ({ rule, dispatch }) => {
   const isEditing = record => record.key === editingKey;
 
   const deleteRule = record => {
-    console.log('============ record =============');
-    console.log(record);
-    console.log('============ data[record.key] =============');
-    console.log(data[record.key]);
-
     ipcRenderer.send('async-rules-delete', record._id);
   };
   const edit = record => {
@@ -100,21 +89,13 @@ const Rule = ({ rule, dispatch }) => {
   const save = async key => {
     try {
       const row = await form.validateFields();
-      console.log('============ row =============');
-      console.log(row);
-      console.log('============ key    =============');
-      console.log(key);
       const newData = [...data];
       const index = newData.findIndex(item => key === item.key);
-      console.log('============ index =============');
-      console.log(newData[index]);
 
       if (index > -1) {
         const item = newData[index];
         newData.splice(index, 1, { ...item, ...row });
         setData(newData);
-        console.log('============ newData =============');
-        console.log(newData);
         ipcRenderer.send('rules-edit', newData);
 
         setEditingKey('');

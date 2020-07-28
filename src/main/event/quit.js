@@ -10,6 +10,8 @@ function checkQuit(mainWindow, event) {
     message: '确认要最小化程序到托盘吗？',
     buttons: ['确认', '关闭程序'],
   };
+  console.log('============ process.platform =============');
+  console.log(process.platform);
   dialog.showMessageBox(options, index => {
     if (index === 0) {
       event.preventDefault();
@@ -28,10 +30,14 @@ export default function handleQuit() {
   const mainWindows = global.application.windowManager.getWindows();
   mainWindow.on('close', event => {
     event.preventDefault();
-    checkQuit(mainWindow, event);
+    // checkQuit(mainWindow, event);
+    global.proxy.close();
+    app.exit(0);
   });
   app.on('window-all-closed', () => {
     event.preventDefault();
+    console.log('============ window-all-closed =============');
+    console.log();
     checkQuit(mainWindow, event);
     if (!hasQuit) {
       if (process.platform !== 'darwin') {

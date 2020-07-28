@@ -15,13 +15,7 @@ class HeaderComponent extends Component {
     ipcRenderer.send('get-proxy-status');
 
     ipcRenderer.on('proxy-status', (event, data) => {
-      console.log('============ event,data =============');
-      console.log(event, data);
       this.setState({ status: data });
-      console.log('============ this.state =============');
-      console.log(this.state);
-      console.log('============ this.setState =============');
-      console.log(this.setState);
     });
   }
   proxyStart = () => {
@@ -33,8 +27,6 @@ class HeaderComponent extends Component {
   };
   render() {
     const { status } = this.state;
-    console.log('============ status =============');
-    console.log(status);
     return (
       <Header className="header">
         <Row>

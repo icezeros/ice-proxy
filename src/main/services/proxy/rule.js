@@ -10,23 +10,12 @@ module.exports = {
     rules = rules.sort((a, b) => {
       return b.from.length - a.from.length;
     });
-    console.log('============ rules =============');
-    console.log(rules);
     let flag = false;
-    console.log('============ flag =============');
-    console.log(flag);
     for (const rule of rules) {
       if (flag) {
         break;
       }
       if (requestDetail.url.startsWith(rule.from)) {
-        console.log('============ requestDetail =============');
-        console.log(requestDetail.requestOptions);
-        console.log(requestDetail.requestData);
-        console.log(requestDetail.url);
-        // console.log(requestDetail._req);
-        console.log('============ 1 =============');
-        console.log(1);
         const fromUrlObj = url.parse(rule.from);
         const toUrlObj = url.parse(rule.to);
         let differentUrl = _.difference(
@@ -35,10 +24,6 @@ module.exports = {
         );
         differentUrl.unshift('');
         differentUrl = differentUrl.join('/');
-        console.log('============ rule.from =============');
-        console.log(rule.from);
-        console.log('============ urlObj =============');
-        console.log(toUrlObj);
         const newRequestOptions = requestDetail.requestOptions;
         newRequestOptions.hostname = toUrlObj.hostname;
         newRequestOptions.port = toUrlObj.port;
@@ -50,10 +35,6 @@ module.exports = {
 
         requestDetail.url = requestDetail.url.replace(rule.from, rule.to);
         requestDetail.requestOptions = newRequestOptions;
-        console.log('============ requestDetail.url =============');
-        console.log(requestDetail.url);
-        console.log('============ requestDetail.requestOptions =============');
-        console.log(requestDetail.requestOptions);
         flag = true;
         return requestDetail;
         // newRequestOptions.url = "11001";
