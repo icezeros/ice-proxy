@@ -3,6 +3,8 @@ import is from 'electron-is';
 
 import logger from './logger';
 import Application from './Application';
+import { IProxy } from './services/proxy';
+
 import handleQuit from './event/quit';
 import handleMessage from './event';
 if (process.env.NODE_ENV !== 'development') {
@@ -16,6 +18,13 @@ if (process.env.NODE_ENV !== 'development') {
 // }
 const application = new Application();
 global.application = application;
+global.proxy = new IProxy();
+
+console.log('============ IProxy =============');
+console.log(IProxy);
+
+// console.log('============ global.proxy =============');
+// console.log(proxy);
 
 function makeSingleInstance(callback) {
   if (is.mas()) {

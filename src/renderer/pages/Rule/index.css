@@ -1,0 +1,16 @@
+.demoContainer {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.margin {
+  margin-top: 15px;
+}
+
+:global .add {
+  margin-left: 40px;
+}
+
+/* :global .add:hover {
+  margin-left: 70px;
+} */

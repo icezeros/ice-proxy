@@ -41,51 +41,11 @@ class IPC extends React.Component {
     });
   }
 
-  handleSendSync = () => {
-    ipcRenderer.send('sync-render', '我是来自渲染进程的异步消息');
-  };
-
-  handleSendAsync = () => {
-    const msg = ipcRenderer.sendSync(
-      'async-render',
-      '我是来自渲染进程的同步消息'
-    );
-    this.setState({ msg });
-  };
-
-  handleStart = () => {
-    ipcRenderer.send('start-msg');
-  };
-
-  handleEnd = () => {
-    ipcRenderer.send('end-msg');
-  };
-
-  handleRemote = () => {
-    remote.dialog.showErrorBox(
-      '主进程才有的dialog模块',
-      '我是使用remote调用的'
-    );
-  };
-
-  handleReadGlobal = () => {
-    const mainId = getGlobal('mainId') || 10;
-    const dirname = getGlobal('__dirname') || 11;
-    // const deviecMac = getGlobal('device').mac || 12;
-    const deviecMac2 = getGlobal('device');
-    console.log('============ deviecMac2 =============');
-    console.log(deviecMac2);
-    const deviecMac = 12;
-    const myField = getGlobal('myField') || 13;
-    this.setState({ mainId, dirname, deviecMac, myField });
-  };
-
-  changeGloable = () => {
-    getGlobal('myField').name = 'code秘密花园';
-    this.setState({ myField: getGlobal('myField') });
-  };
   onFinish = values => {
     console.log('Success:', values);
+    ipcRenderer.send('rules-add', values);
+    console.log('============ ipcRenderer =============');
+    console.log(ipcRenderer);
   };
 
   onFinishFailed = errorInfo => {

@@ -6,6 +6,6 @@ export default class Index extends PureComponent {
     this.state = {};
   }
   render() {
-    return <Empty description="Dashboard还未开发" />;
+    return <Empty description="Dashboard还未完成" />;
   }
 }

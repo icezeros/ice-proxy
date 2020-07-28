@@ -42,7 +42,10 @@ export default class WindowManager extends EventEmitter {
     }
 
     // Optimized for small screen users
-    const { width, height } = screen.getPrimaryDisplay().workAreaSize;
+    const {
+      width = 1680,
+      height = 1027,
+    } = screen.getPrimaryDisplay().workAreaSize;
     console.log('============ width, height =============');
     console.log(width, height);
     const widthScale = width >= 1280 ? 1 : 0.875;

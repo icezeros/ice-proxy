@@ -11,6 +11,8 @@ class Nav extends Component {
   constructor(props) {
     super(props);
     const hash = location.hash.split('/')[1];
+    console.log('============ hash =============');
+    console.log(hash);
     this.state = { current: hash ? hash : 'Home' };
   }
 
@@ -43,41 +45,14 @@ class Nav extends Component {
           selectedKeys={[this.state.current]}
           onClick={this.handleClick}
         >
-          <Item key="Home">
-            <Link to="/">主页</Link>
+          <Item key="dashboard">
+            <Link to="/dashboard">Dashboard</Link>
           </Item>
-          <Item key="Set">
-            <Link to="/set">设置</Link>
+          <Item key="rule">
+            <Link to="/rule">规则列表</Link>
           </Item>
-          <Item key="Add">
-            <Link to="/add">新增</Link>
-          </Item>
-          <Item key="Window">
-            <Link to="/window">窗口</Link>
-          </Item>
-          <Item key="IPC">
-            <Link to="/IPC">进程通信</Link>
-          </Item>
-          <Item key="Dialog">
-            <Link to="/Dialog">弹框</Link>
-          </Item>
-          <Item key="System">
-            <Link to="/System">系统</Link>
-          </Item>
-          <Item key="MenuView">
-            <Link to="/MenuView">菜单</Link>
-          </Item>
-          <Item key="Print">
-            <Link to="/Print">打印</Link>
-          </Item>
-          <Item key="Protect">
-            <Link to="/Protect">保护措施</Link>
-          </Item>
-          <Item key="Shell">
-            <Link to="/Shell">Shell</Link>
-          </Item>
-          <Item key="Antd">
-            <Link to="/Antd">Antd</Link>
+          <Item key="add">
+            <Link to="/add">新增规则</Link>
           </Item>
         </Menu>
       </div>
@@ -86,3 +61,31 @@ class Nav extends Component {
 }
 
 export default Nav;
+
+// <Item key="Window">
+//             <Link to="/window">窗口</Link>
+//           </Item>
+//           <Item key="IPC">
+//             <Link to="/IPC">进程通信</Link>
+//           </Item>
+//           <Item key="Dialog">
+//             <Link to="/Dialog">弹框</Link>
+//           </Item>
+//           <Item key="System">
+//             <Link to="/System">系统</Link>
+//           </Item>
+//           <Item key="MenuView">
+//             <Link to="/MenuView">菜单</Link>
+//           </Item>
+//           <Item key="Print">
+//             <Link to="/Print">打印</Link>
+//           </Item>
+//           <Item key="Protect">
+//             <Link to="/Protect">保护措施</Link>
+//           </Item>
+//           <Item key="Shell">
+//             <Link to="/Shell">Shell</Link>
+//           </Item>
+//           <Item key="Antd">
+//             <Link to="/Antd">Antd</Link>
+//           </Item>

@@ -21,14 +21,14 @@ body {
 :global .bodyContainer {
   position: absolute;
   left: 160px;
-  zindex: 999;
+  z-index: 100;
   right: 0;
   height: 100%;
   background: rgba(88, 94, 94, 0.95);
 }
 
 :global .bodyContainer2 {
-  zindex: 100;
+  z-index: 100;
   overflow: auto;
   padding-top: 80px;
   padding-left: 12px;

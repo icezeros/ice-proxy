@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Table, Input, InputNumber, Popconfirm, Form } from 'antd';
-
+import { connect } from 'dva';
+import './index.css';
+const { ipcRenderer, remote } = require('electron');
+console.log('============ connect =============');
+console.log(connect);
 const originData = [];
 
-for (let i = 0; i < 100; i++) {
+for (let i = 0; i < 15; i++) {
   originData.push({
     key: i.toString(),
     name: `Edrward ${i}`,
@@ -22,7 +26,7 @@ const EditableCell = ({
   children,
   ...restProps
 }) => {
-  const inputNode = inputType === 'number' ? <InputNumber /> : <Input />;
+  //   const inputNode = <Input />;
   return (
     <td {...restProps}>
       {editing ? (
@@ -38,7 +42,7 @@ const EditableCell = ({
             },
           ]}
         >
-          {inputNode}
+          <Input />
         </Form.Item>
       ) : (
         children
@@ -47,13 +51,38 @@ const EditableCell = ({
   );
 };
 
-const Set = () => {
+const Rule = ({ rule, dispatch }) => {
   const [form] = Form.useForm();
   const [data, setData] = useState(originData);
   const [editingKey, setEditingKey] = useState('');
+  useEffect(() => {
+    console.log('============ 11111 =============');
+    console.log(11111);
+    ipcRenderer.send('sync-rules-list');
+
+    ipcRenderer.on('async-rules', (event, rules) => {
+      console.log('============ rules1111 =============');
+      console.log(rules);
+      rules.forEach((rule, key) => {
+        rule.key = key;
+      });
+      setData(rules);
+    });
+    return function cleanup() {
+      ipcRenderer.removeAllListeners(['async-rules']);
+    };
+  }, [true]);
 
   const isEditing = record => record.key === editingKey;
 
+  const deleteRule = record => {
+    console.log('============ record =============');
+    console.log(record);
+    console.log('============ data[record.key] =============');
+    console.log(data[record.key]);
+
+    ipcRenderer.send('async-rules-delete', record._id);
+  };
   const edit = record => {
     form.setFieldsValue({
       name: '',
@@ -73,13 +102,21 @@ const Set = () => {
       const row = await form.validateFields();
       console.log('============ row =============');
       console.log(row);
+      console.log('============ key    =============');
+      console.log(key);
       const newData = [...data];
       const index = newData.findIndex(item => key === item.key);
+      console.log('============ index =============');
+      console.log(newData[index]);
 
       if (index > -1) {
         const item = newData[index];
         newData.splice(index, 1, { ...item, ...row });
         setData(newData);
+        console.log('============ newData =============');
+        console.log(newData);
+        ipcRenderer.send('rules-edit', newData);
+
         setEditingKey('');
       } else {
         newData.push(row);
@@ -95,28 +132,29 @@ const Set = () => {
     {
       title: 'name',
       dataIndex: 'name',
-      width: '25%',
+      width: '15%',
       editable: true,
     },
     {
       title: 'from',
       dataIndex: 'from',
-      width: '15%',
+      width: '35%',
       editable: true,
     },
     {
       title: 'to',
       dataIndex: 'to',
-      width: '40%',
+      width: '35%',
       editable: true,
     },
     {
       title: 'operation',
       dataIndex: 'operation',
+      align: 'center',
       render: (_, record) => {
         const editable = isEditing(record);
         return editable ? (
-          <span>
+          <span className="">
             <a
               href="javascript:;"
               onClick={() => save(record.key)}
@@ -124,20 +162,27 @@ const Set = () => {
                 marginRight: 8,
               }}
             >
-              Save
+              确定
             </a>
             <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
-              <a>Cancel</a>
+              <a>取消</a>
             </Popconfirm>
           </span>
         ) : (
-          <a disabled={editingKey !== ''} onClick={() => edit(record)}>
-            Edit
-          </a>
+          <span>
+            <a disabled={editingKey !== ''} onClick={() => edit(record)}>
+              编辑
+            </a>
+
+            <a disabled={editingKey !== ''} onClick={() => deleteRule(record)}>
+              删除
+            </a>
+          </span>
         );
       },
     },
   ];
+
   const mergedColumns = columns.map(col => {
     if (!col.editable) {
       return col;
@@ -154,6 +199,7 @@ const Set = () => {
       }),
     };
   });
+
   return (
     <Form form={form} component={false}>
       <Table
@@ -166,11 +212,12 @@ const Set = () => {
         dataSource={data}
         columns={mergedColumns}
         rowClassName="editable-row"
-        pagination={{
-          onChange: cancel,
-        }}
+        pagination={false}
       />
     </Form>
   );
 };
-export default Set;
+// export default Set;
+export default connect(({ rule }) => ({
+  rule,
+}))(Rule);

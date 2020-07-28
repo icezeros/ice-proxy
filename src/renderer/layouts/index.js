@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Layout, LocaleProvider, Card } from 'antd';
-import { connect } from 'dva';
+import { connect } from 'umi';
 import 'antd/dist/antd.less';
 import zhCN from 'antd/lib/locale-provider/zh_CN';
 import Header from './Header';
@@ -17,6 +17,9 @@ const { Content } = Layout;
 //   electron = window.require('electron');
 //   ipcRenderer = electron.ipcRenderer;
 // }
+// export default connect(({ products }) => ({
+//   products,
+// }))(Products);
 
 export default class App extends Component {
   componentDidMount() {

@@ -50,5 +50,7 @@ export default {
       'use-proxy': false,
       'window-state': {},
     },
+
+    rules: [],
   },
 };

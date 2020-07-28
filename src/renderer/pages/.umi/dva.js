@@ -19,7 +19,8 @@ export function _onCreate() {
     app.use(plugin);
   });
   
-  app.model({ namespace: 'global', ...(require('/Users/huguosen/workspace/ice/ice-proxy/src/renderer/models/global.js').default) });
+  app.model({ namespace: 'global', ...(require('/Users/icezeros/workspace/github/ice-proxy/src/renderer/models/global.js').default) });
+app.model({ namespace: 'rule', ...(require('/Users/icezeros/workspace/github/ice-proxy/src/renderer/models/rule.js').default) });
 }
 
 export function getApp() {

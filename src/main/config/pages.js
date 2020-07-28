@@ -1,4 +1,6 @@
 import is from 'electron-is';
+import path from 'path';
+import url from 'url';
 
 export default {
   main: {

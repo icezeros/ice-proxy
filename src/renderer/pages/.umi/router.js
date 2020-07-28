@@ -39,6 +39,17 @@ const routes = [
         "_title_default": "umi-electron"
       },
       {
+        "path": "/Dashboard",
+        "exact": true,
+        "component": _dvaDynamic({
+  
+  component: () => import('../Dashboard/index.js'),
+  
+}),
+        "_title": "umi-electron",
+        "_title_default": "umi-electron"
+      },
+      {
         "path": "/Dialog",
         "exact": true,
         "component": _dvaDynamic({
@@ -94,11 +105,11 @@ const routes = [
         "_title_default": "umi-electron"
       },
       {
-        "path": "/Set",
+        "path": "/Rule",
         "exact": true,
         "component": _dvaDynamic({
   
-  component: () => import('../Set/index.js'),
+  component: () => import('../Rule/index.js'),
   
 }),
         "_title": "umi-electron",
@@ -149,7 +160,7 @@ const routes = [
         "_title_default": "umi-electron"
       },
       {
-        "component": () => React.createElement(require('/Users/huguosen/workspace/ice/ice-proxy/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'pages', hasRoutesInConfig: false }),
+        "component": () => React.createElement(require('/Users/icezeros/workspace/github/ice-proxy/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'pages', hasRoutesInConfig: false }),
         "_title": "umi-electron",
         "_title_default": "umi-electron"
       }
@@ -158,7 +169,7 @@ const routes = [
     "_title_default": "umi-electron"
   },
   {
-    "component": () => React.createElement(require('/Users/huguosen/workspace/ice/ice-proxy/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'pages', hasRoutesInConfig: false }),
+    "component": () => React.createElement(require('/Users/icezeros/workspace/github/ice-proxy/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'pages', hasRoutesInConfig: false }),
     "_title": "umi-electron",
     "_title_default": "umi-electron"
   }
